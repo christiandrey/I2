@@ -1,0 +1,22 @@
+<loader *ngIf="pageIsLoading"></loader>
+<ion-content no-padding *ngIf="!pageIsLoading">
+  <div class="container" [(ngClass)]="timeOfDay">
+    <p class="location" *ngIf="currentData.name !== ''">{{ currentData.name }}</p>
+    <p class="location" *ngIf="currentData.name == ''">{{ currentData.coord.lat + ", " + currentData.coord.lon }}</p>
+    <p *ngIf="temperatureUnit == 'celsius'">TODAY &#176;C</p>
+    <p *ngIf="temperatureUnit == 'fahrenheit'">TODAY &#176;F</p>
+    <div class="current-data-container" (tap)="handleChangeUnits()" (press)="handleRefresh()">
+      <img [attr.src]="animatedAssetsURL + currentData.weather[0].icon.substr(0,2) + '.gif'" alt="loading..." class="icon">
+      <p class="temperature">{{ currentData.main.temp }}</p>
+      <p class="description">{{ currentData.weather[0].main }}</p>
+    </div>
+    <div class="forecast-data-container">
+      <div class="forecast-data-item" *ngFor="let forecastItem of forecastData; let i = index">
+        <span class="title" *ngIf="i == 0">TOMORROW</span>
+        <span class="title" *ngIf="i !== 0">{{ days[dayOfWeek + i + 1].toUpperCase() }}</span>
+        <span class="temperature">{{ forecastItem.main.temp.toFixed(1) }}</span>
+        <img [attr.src]="nonAnimatedAssetsURL + forecastItem.weather[0].icon.substr(0,2) + '.png'" alt="loading..." class="icon">
+      </div>
+    </div>
+  </div>
+</ion-content>

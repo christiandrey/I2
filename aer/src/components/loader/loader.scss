@@ -1,0 +1,16 @@
+loader {
+    div {
+        background-color: #f0f041;
+        width: 100%;
+        height: 100%;
+        display: flex;
+
+        img.loader-icon {
+            width: 8%;
+            max-width: 50px;
+            min-width: 10px;
+            height: auto;
+            margin: auto;
+        }
+    }
+}

@@ -1,0 +1,142 @@
+page-home {
+    div.container {
+        width: 100%;
+        height: 100%;
+        padding: 40px 50px;
+        display: flex;
+        flex-direction: column;
+        transition: background-color .45s, color .45s;
+
+        &.day {
+            background-color: map-get($colors, day);
+            color: map-get($colors, night);
+
+            .forecast-data-item {
+                border-bottom: solid 2px;
+                border-bottom-color: map-get($colors, night)
+            }
+        }
+
+        &.night {
+            background-color: map-get($colors, night);
+            color: white;
+
+            .forecast-data-item {
+                border-bottom: solid 2px white;
+            }
+        }
+
+        p.location {
+            font-size: 9vw;
+            font-weight: lighter;
+            margin-top: 0;
+            margin-bottom: 15px;
+
+            &+p {
+                font-size: 3.5vw;
+                margin-top: 0;
+                letter-spacing: 0.4px;
+                font-weight: bold;
+            }
+        }
+
+        div.current-data-container {
+            text-align: center;
+            margin: auto;
+
+            img.icon {
+                width: 33%;
+                min-width: 40px;
+                max-width: 80px;
+                height: auto;
+            }
+
+            p.temperature {
+                font-size: 200%;
+                font-weight: bold;
+                margin-top: 5px;
+                margin-bottom: 0;
+
+                &:after {
+                    content: "\00B0"
+                }
+
+            }
+
+            p.description {
+                font-size: 3.5vw;
+                letter-spacing: 0.4px;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+        }
+
+        div.forecast-data-container {
+            align-self: baseline;
+            width: 100%;
+
+            .forecast-data-item {
+                font-size: 3.5vw;
+                letter-spacing: 0.4px;
+                font-weight: bold;
+                padding: 8px 0;
+                display: flex;
+                justify-content: flex-end;
+                transition: border-bottom-color .45s;
+
+                &:first-of-type {
+                    padding-top: 0;
+                }
+
+                &:last-of-type {
+                    border-bottom: none;
+                    padding-bottom: 0;
+                }
+                
+                span.title {
+                    align-self: center;
+                    margin-right: auto;
+                    animation-name: forecast-title;
+                    animation-duration: 0.7s;
+                }
+
+                span.temperature {
+                    align-self: center;
+                    font-size: 150%;
+                    margin-right: 15px;
+                    opacity: 0;
+                    animation-name: forecast-body;
+                    animation-delay: 0.2s;
+                    animation-duration: 0.7s;
+                    animation-fill-mode: forwards;
+
+                    &:after {
+                        content: "\00B0"
+                    }   
+                }
+
+                img.icon {
+                    width: 20px;
+                    height: auto;
+                    align-self: center;
+                    animation-name: forecast-body;
+                    opacity: 0;
+                    animation-delay: 0.4s;
+                    animation-duration: 0.7s;
+                    animation-fill-mode: forwards;
+                }
+            }
+        }
+
+    }
+
+    @keyframes forecast-title {
+        from {transform: translateY(8px)}
+        to {transform: translateY(0)}
+    }
+
+    @keyframes forecast-body {
+        from {transform: translateY(8px); opacity: 0}
+        to {transform: translateY(0); opacity: 1}
+    }
+}
